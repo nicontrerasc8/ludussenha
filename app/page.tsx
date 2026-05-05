@@ -9,6 +9,7 @@ type Status = {
 };
 
 let supabaseClient: SupabaseClient | null = null;
+const passwordRecoveryRedirectUrl = "https://ludussenha.vercel.app/";
 
 function getSupabase() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -73,7 +74,7 @@ export default function Home() {
     setStatus({ type: "idle", message: "" });
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin,
+      redirectTo: passwordRecoveryRedirectUrl,
     });
 
     setIsLoading(false);
